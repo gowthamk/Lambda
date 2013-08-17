@@ -1,0 +1,1 @@
+((\z'.((\x.(succ x)) ((\x.(succ x)) z'))) ((\x.(succ x)) (succ 0)))

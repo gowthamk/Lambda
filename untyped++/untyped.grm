@@ -1,0 +1,59 @@
+(*  User declarations section for helper functions *)
+open Ast
+%%
+(* ML Yacc Declarations *)
+%name Untyped (* tokens signature will be Untyped_TOKENS *)
+(* 
+  The structure Token is defined by LrParser structure provided 
+  by ml-yacc-lib  
+*)
+%header (functor UntypedLrValsFun (structure Token : TOKEN) : Untyped_LRVALS)
+%eop EOF
+%noshift EOF
+%pos int
+(* 
+  Lex functor is constructed to expect TOKENS signature 
+  constructed from following declarations
+ *)
+%term   LAM 
+      | DOT 
+      | LPAREN 
+      | RPAREN 
+      | VAR of string 
+      | TRUE
+      | FALSE
+      | IF
+      | THEN
+      | ELSE
+      | ZERO
+      | SUCC
+      | PRED
+      | ISZERO
+      | EOF
+%nonterm prog of top_level | expr of exp | app_term of exp
+  | atom of exp
+(*
+  Precedence and associativity are implicit
+*)
+%verbose
+%pure
+
+%%
+(* BNF Rules *)
+prog : expr (expr)
+
+expr :  LAM VAR DOT expr (Abs(VAR,expr))
+      | IF expr THEN expr ELSE expr (Ite(expr1,expr2,expr3))
+      | SUCC expr (Succ expr)
+      | PRED expr (Pred expr)
+      | ISZERO expr (IsZero expr)
+      | app_term (app_term)
+
+app_term :  atom (atom)
+          | app_term atom (App(app_term,atom))
+
+atom :  VAR (Var(VAR))
+      | LPAREN expr RPAREN (expr)
+      | TRUE  (True)
+      | FALSE (False)
+      | ZERO (Zero)
