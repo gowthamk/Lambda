@@ -1,0 +1,154 @@
+
+state 0:
+
+	prog : . expr 
+
+	LAM	shift 6
+	LPAREN	shift 5
+	VAR	shift 4
+
+	prog	goto 13
+	expr	goto 3
+	non_lam_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 1:
+
+	non_lam_term : atom .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 2:
+
+	expr : non_lam_term .  (reduce by rule 2)
+	non_lam_term : non_lam_term . atom 
+
+	LPAREN	shift 5
+	VAR	shift 4
+
+	atom	goto 7
+
+	.	reduce by rule 2
+
+
+state 3:
+
+	prog : expr .  (reduce by rule 0)
+
+
+
+	.	reduce by rule 0
+
+
+state 4:
+
+	atom : VAR .  (reduce by rule 5)
+
+
+
+	.	reduce by rule 5
+
+
+state 5:
+
+	atom : LPAREN . expr RPAREN 
+
+	LAM	shift 6
+	LPAREN	shift 5
+	VAR	shift 4
+
+	expr	goto 8
+	non_lam_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 6:
+
+	expr : LAM . VAR DOT expr 
+
+	VAR	shift 9
+
+
+	.	error
+
+
+state 7:
+
+	non_lam_term : non_lam_term atom .  (reduce by rule 4)
+
+
+
+	.	reduce by rule 4
+
+
+state 8:
+
+	atom : LPAREN expr . RPAREN 
+
+	RPAREN	shift 10
+
+
+	.	error
+
+
+state 9:
+
+	expr : LAM VAR . DOT expr 
+
+	DOT	shift 11
+
+
+	.	error
+
+
+state 10:
+
+	atom : LPAREN expr RPAREN .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 11:
+
+	expr : LAM VAR DOT . expr 
+
+	LAM	shift 6
+	LPAREN	shift 5
+	VAR	shift 4
+
+	expr	goto 12
+	non_lam_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 12:
+
+	expr : LAM VAR DOT expr .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 13:
+
+
+	EOF	accept
+
+
+	.	error
+
+9 of 29 action table entries left after compaction
+11 goto table entries
