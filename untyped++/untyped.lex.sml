@@ -367,45 +367,45 @@ in Vector.fromList(map g
 [{fin = [], trans = 0},
 {fin = [], trans = 1},
 {fin = [], trans = 1},
-{fin = [(N 14)], trans = 3},
-{fin = [(N 14)], trans = 4},
-{fin = [(N 14)], trans = 5},
-{fin = [(N 14)], trans = 6},
-{fin = [(N 14)], trans = 7},
-{fin = [(N 14)], trans = 8},
-{fin = [(N 14),(N 27)], trans = 3},
-{fin = [(N 14)], trans = 10},
-{fin = [(N 14)], trans = 11},
-{fin = [(N 14),(N 41)], trans = 3},
-{fin = [(N 14)], trans = 13},
-{fin = [(N 14)], trans = 14},
-{fin = [(N 14)], trans = 15},
-{fin = [(N 14),(N 53)], trans = 3},
-{fin = [(N 14)], trans = 17},
-{fin = [(N 14)], trans = 18},
-{fin = [(N 14)], trans = 19},
-{fin = [(N 14),(N 58)], trans = 3},
-{fin = [(N 14)], trans = 21},
-{fin = [(N 14)], trans = 22},
-{fin = [(N 14)], trans = 23},
-{fin = [(N 14)], trans = 24},
-{fin = [(N 14)], trans = 25},
-{fin = [(N 14),(N 65)], trans = 3},
-{fin = [(N 14),(N 36)], trans = 3},
-{fin = [(N 14)], trans = 28},
-{fin = [(N 14)], trans = 29},
-{fin = [(N 14)], trans = 30},
-{fin = [(N 14)], trans = 31},
-{fin = [(N 14),(N 33)], trans = 3},
-{fin = [(N 14)], trans = 33},
-{fin = [(N 14)], trans = 34},
-{fin = [(N 14)], trans = 35},
-{fin = [(N 14),(N 46)], trans = 3},
-{fin = [(N 16)], trans = 0},
-{fin = [(N 48)], trans = 0},
-{fin = [(N 18)], trans = 0},
-{fin = [(N 22)], trans = 0},
-{fin = [(N 20)], trans = 0},
+{fin = [(N 57)], trans = 3},
+{fin = [(N 57)], trans = 4},
+{fin = [(N 57)], trans = 5},
+{fin = [(N 57)], trans = 6},
+{fin = [(N 57)], trans = 7},
+{fin = [(N 57)], trans = 8},
+{fin = [(N 12),(N 57)], trans = 3},
+{fin = [(N 57)], trans = 10},
+{fin = [(N 57)], trans = 11},
+{fin = [(N 26),(N 57)], trans = 3},
+{fin = [(N 57)], trans = 13},
+{fin = [(N 57)], trans = 14},
+{fin = [(N 57)], trans = 15},
+{fin = [(N 38),(N 57)], trans = 3},
+{fin = [(N 57)], trans = 17},
+{fin = [(N 57)], trans = 18},
+{fin = [(N 57)], trans = 19},
+{fin = [(N 43),(N 57)], trans = 3},
+{fin = [(N 57)], trans = 21},
+{fin = [(N 57)], trans = 22},
+{fin = [(N 57)], trans = 23},
+{fin = [(N 57)], trans = 24},
+{fin = [(N 57)], trans = 25},
+{fin = [(N 50),(N 57)], trans = 3},
+{fin = [(N 21),(N 57)], trans = 3},
+{fin = [(N 57)], trans = 28},
+{fin = [(N 57)], trans = 29},
+{fin = [(N 57)], trans = 30},
+{fin = [(N 57)], trans = 31},
+{fin = [(N 18),(N 57)], trans = 3},
+{fin = [(N 57)], trans = 33},
+{fin = [(N 57)], trans = 34},
+{fin = [(N 57)], trans = 35},
+{fin = [(N 31),(N 57)], trans = 3},
+{fin = [(N 59)], trans = 0},
+{fin = [(N 33)], trans = 0},
+{fin = [(N 61)], trans = 0},
+{fin = [(N 65)], trans = 0},
+{fin = [(N 63)], trans = 0},
 {fin = [(N 7)], trans = 42},
 {fin = [(N 4)], trans = 43},
 {fin = [(N 4)], trans = 0}])
@@ -451,35 +451,35 @@ let fun continue() = lex() in
 
 			(* Application actions *)
 
-  14 => let val yytext=yymktext() in (*#line 23.25 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug ("var: "^yytext^"\n"); Tokens.VAR(yytext,!line,yypos)(*#line 454.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+  12 => ((*#line 23.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "true"; Tokens.TRUE(!line,yypos)(*#line 454.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 18 => ((*#line 24.24 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "false"; Tokens.FALSE(!line,yypos)(*#line 456.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 21 => ((*#line 25.21 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "if"; Tokens.IF(!line,yypos)(*#line 458.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 26 => ((*#line 26.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "then"; Tokens.THEN(!line,yypos)(*#line 460.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 31 => ((*#line 27.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "else"; Tokens.ELSE(!line,yypos)(*#line 462.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 33 => ((*#line 28.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "zero\n"; Tokens.ZERO(!line,yypos)(*#line 464.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 38 => ((*#line 29.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "succ"; Tokens.SUCC(!line,yypos)(*#line 466.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 4 => ((*#line 21.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)line := (!line)+1; lex()(*#line 468.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 43 => ((*#line 30.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "pred"; Tokens.PRED(!line,yypos)(*#line 470.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 50 => ((*#line 31.25 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "iszero"; Tokens.ISZERO(!line,yypos)(*#line 472.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+)
+| 57 => let val yytext=yymktext() in (*#line 32.25 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug ("var: "^yytext^"\n"); Tokens.VAR(yytext,!line,yypos)(*#line 474.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
  end
-| 16 => ((*#line 24.21 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "lam\n";Tokens.LAM(!line,yypos)(*#line 456.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+| 59 => ((*#line 33.21 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "lam\n";Tokens.LAM(!line,yypos)(*#line 476.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
 )
-| 18 => ((*#line 25.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "dot\n"; Tokens.DOT(!line,yypos)(*#line 458.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+| 61 => ((*#line 34.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "dot\n"; Tokens.DOT(!line,yypos)(*#line 478.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
 )
-| 20 => ((*#line 26.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "lparen\n"; Tokens.LPAREN(!line,yypos)(*#line 460.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+| 63 => ((*#line 35.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "lparen\n"; Tokens.LPAREN(!line,yypos)(*#line 480.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
 )
-| 22 => ((*#line 27.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "rparen\n"; Tokens.RPAREN(!line,yypos)(*#line 462.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 27 => ((*#line 28.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "true"; Tokens.TRUE(!line,yypos)(*#line 464.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 33 => ((*#line 29.24 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "false"; Tokens.FALSE(!line,yypos)(*#line 466.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 36 => ((*#line 30.21 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "if"; Tokens.IF(!line,yypos)(*#line 468.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 4 => ((*#line 21.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)line := (!line)+1; lex()(*#line 470.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 41 => ((*#line 31.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "then"; Tokens.THEN(!line,yypos)(*#line 472.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 46 => ((*#line 32.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "else"; Tokens.ELSE(!line,yypos)(*#line 474.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 48 => ((*#line 33.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "zero\n"; Tokens.ZERO(!line,yypos)(*#line 476.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 53 => ((*#line 34.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "succ"; Tokens.SUCC(!line,yypos)(*#line 478.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 58 => ((*#line 35.23 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "pred"; Tokens.PRED(!line,yypos)(*#line 480.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
-)
-| 65 => ((*#line 36.25 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "iszero"; Tokens.ISZERO(!line,yypos)(*#line 482.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
+| 65 => ((*#line 36.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "rparen\n"; Tokens.RPAREN(!line,yypos)(*#line 482.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
 )
 | 7 => ((*#line 22.20 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex"*)debug "whitespace"; lex()(*#line 484.1 "/Users/gowtham/git/hacks/tapl/untyped++/untyped.lex.sml"*)
 )

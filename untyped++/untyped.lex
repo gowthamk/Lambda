@@ -20,11 +20,6 @@ ws=[\ \t];
 %%
 <INITIAL>{eol} => (line := (!line)+1; lex());
 <INITIAL>{ws}+ => (debug "whitespace"; lex());
-<INITIAL>{variable} => (debug ("var: "^yytext^"\n"); Tokens.VAR(yytext,!line,yypos));
-<INITIAL>("\\") => (debug "lam\n";Tokens.LAM(!line,yypos));
-<INITIAL>(".") => (debug "dot\n"; Tokens.DOT(!line,yypos));
-<INITIAL>("(") => (debug "lparen\n"; Tokens.LPAREN(!line,yypos));
-<INITIAL>(")") => (debug "rparen\n"; Tokens.RPAREN(!line,yypos));
 <INITIAL>("true") => (debug "true"; Tokens.TRUE(!line,yypos));
 <INITIAL>("false") => (debug "false"; Tokens.FALSE(!line,yypos));
 <INITIAL>("if") => (debug "if"; Tokens.IF(!line,yypos));
@@ -34,3 +29,9 @@ ws=[\ \t];
 <INITIAL>("succ") => (debug "succ"; Tokens.SUCC(!line,yypos));
 <INITIAL>("pred") => (debug "pred"; Tokens.PRED(!line,yypos));
 <INITIAL>("iszero") => (debug "iszero"; Tokens.ISZERO(!line,yypos));
+<INITIAL>{variable} => (debug ("var: "^yytext^"\n"); Tokens.VAR(yytext,!line,yypos));
+<INITIAL>("\\") => (debug "lam\n";Tokens.LAM(!line,yypos));
+<INITIAL>(".") => (debug "dot\n"; Tokens.DOT(!line,yypos));
+<INITIAL>("(") => (debug "lparen\n"; Tokens.LPAREN(!line,yypos));
+<INITIAL>(")") => (debug "rparen\n"; Tokens.RPAREN(!line,yypos));
+
