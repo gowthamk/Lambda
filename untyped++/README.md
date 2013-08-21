@@ -24,9 +24,9 @@ Consider the following lambda term -
 where t is a large lambda term in head normal form. Beta redex 
 rule:
 
-      e2 ==> v2
-.......................
-(\x.e1) e2 ==> [v2/x]e1
+        e2 ==> v2
+  .......................
+  (\x.e1) e2 ==> [v2/x]e1
 
 dictates us do the textual substitution of t for a and resultant 
 term for x, which leads to size explosion. Also, substitution in
@@ -97,15 +97,15 @@ in implicit substiutions:
 2. Free vars of substitution are captured by bound var of enclosing 
    lambda term: There is no concept of capture in our substitutions as
    we never substitute under lambda abstractions.
-So far so good. Now let us add the congruence rules for β redex:
+So far so good. Now let us add the congruence rules for β redex:  
 
-     Δ ⊢ e1 ==> e1'
-  .................... [E-APP1]
-  Δ ⊢ e1 e2 ==> e1' e2
+       Δ ⊢ e1 ==> e1'
+    .................... [E-APP1]
+    Δ ⊢ e1 e2 ==> e1' e2
 
-     Δ ⊢ e2 ==> e2'
-  .................... [E-APP2]
-  Δ ⊢ v1 e2 ==> v1 e2'
+       Δ ⊢ e2 ==> e2'
+    .................... [E-APP2]
+    Δ ⊢ v1 e2 ==> v1 e2'
   
 As an example, consider the following term:  
 
@@ -113,10 +113,10 @@ As an example, consider the following term:
 
 After two reductions, we find ourselves applying [E-β2] rule as:  
 
-      	  [] ⊢ (var) b ==> (sym) b   
-      [t↦(\x.\y.x y, []); x↦a; y↦b] ⊢ (t x y) ==> e1'
- ..........................................................
-    [] ⊢ (\y.t x y,[t↦(\x.\y.x y, []); x↦a]) b ==> e1'
+      	    [] ⊢ (var) b ==> (sym) b   
+        [t↦(\x.\y.x y, []); x↦a; y↦b] ⊢ (t x y) ==> e1'
+    ..........................................................
+        [] ⊢ (\y.t x y,[t↦(\x.\y.x y, []); x↦a]) b ==> e1'
 
 Next, by applying [E-APP1] twice and [E-VAR] once, we derive e1' to be
 	 
