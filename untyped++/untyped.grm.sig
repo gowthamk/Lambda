@@ -3,6 +3,9 @@ sig
 type ('a,'b) token
 type svalue
 val EOF:  'a * 'a -> (svalue,'a) token
+val SEMICOLON:  'a * 'a -> (svalue,'a) token
+val EQUALOP:  'a * 'a -> (svalue,'a) token
+val VAL:  'a * 'a -> (svalue,'a) token
 val ISZERO:  'a * 'a -> (svalue,'a) token
 val PRED:  'a * 'a -> (svalue,'a) token
 val SUCC:  'a * 'a -> (svalue,'a) token

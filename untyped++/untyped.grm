@@ -29,8 +29,17 @@ open Ast
       | SUCC
       | PRED
       | ISZERO
+      | VAL
+      | EQUALOP
+      | SEMICOLON
       | EOF
-%nonterm prog of top_level | expr of exp | app_term of exp
+%nonterm start of top_level 
+  | prog of prog 
+  | topdecls of top_decl list 
+  | topdecl of top_decl
+  | decl of decl 
+  | expr of exp 
+  | app_term of exp 
   | atom of exp
 (*
   Precedence and associativity are implicit
@@ -40,7 +49,16 @@ open Ast
 
 %%
 (* BNF Rules *)
-prog : expr (expr)
+start : prog (prog)
+
+prog:   topdecls SEMICOLON expr (Prog(topdecls,expr))
+      | expr (Prog([],expr))
+
+topdecls : topdecl SEMICOLON topdecls (topdecl :: topdecls)
+
+topdecl : decl (decl)
+
+decl : VAL VAR EQUALOP expr (Val(VAR,expr))
 
 expr :  LAM VAR DOT expr (Abs(VAR,expr))
       | IF expr THEN expr ELSE expr (Ite(expr1,expr2,expr3))

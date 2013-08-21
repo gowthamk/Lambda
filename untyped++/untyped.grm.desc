@@ -1,20 +1,25 @@
 
 state 0:
 
-	prog : . expr 
+	start : . prog 
 
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+	VAL	shift 8
 
-	prog	goto 28
+	start	goto 40
+	prog	goto 7
+	topdecls	goto 6
+	topdecl	goto 5
+	decl	goto 4
 	expr	goto 3
 	app_term	goto 2
 	atom	goto 1
@@ -24,274 +29,122 @@ state 0:
 
 state 1:
 
-	app_term : atom .  (reduce by rule 7)
-
-
-
-	.	reduce by rule 7
-
-
-state 2:
-
-	expr : app_term .  (reduce by rule 6)
-	app_term : app_term . atom 
-
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	ZERO	shift 7
-
-	atom	goto 14
-
-	.	reduce by rule 6
-
-
-state 3:
-
-	prog : expr .  (reduce by rule 0)
-
-
-
-	.	reduce by rule 0
-
-
-state 4:
-
-	expr : ISZERO . expr 
-
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
-
-	expr	goto 15
-	app_term	goto 2
-	atom	goto 1
-
-	.	error
-
-
-state 5:
-
-	expr : PRED . expr 
-
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
-
-	expr	goto 16
-	app_term	goto 2
-	atom	goto 1
-
-	.	error
-
-
-state 6:
-
-	expr : SUCC . expr 
-
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
-
-	expr	goto 17
-	app_term	goto 2
-	atom	goto 1
-
-	.	error
-
-
-state 7:
-
-	atom : ZERO .  (reduce by rule 13)
-
-
-
-	.	reduce by rule 13
-
-
-state 8:
-
-	expr : IF . expr THEN expr ELSE expr 
-
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
-
-	expr	goto 18
-	app_term	goto 2
-	atom	goto 1
-
-	.	error
-
-
-state 9:
-
-	atom : FALSE .  (reduce by rule 12)
+	app_term : atom .  (reduce by rule 12)
 
 
 
 	.	reduce by rule 12
 
 
-state 10:
+state 2:
 
-	atom : TRUE .  (reduce by rule 11)
+	expr : app_term .  (reduce by rule 11)
+	app_term : app_term . atom 
 
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	ZERO	shift 12
 
+	atom	goto 19
 
 	.	reduce by rule 11
 
 
-state 11:
+state 3:
 
-	atom : VAR .  (reduce by rule 9)
-
-
-
-	.	reduce by rule 9
-
-
-state 12:
-
-	atom : LPAREN . expr RPAREN 
-
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
-
-	expr	goto 19
-	app_term	goto 2
-	atom	goto 1
-
-	.	error
-
-
-state 13:
-
-	expr : LAM . VAR DOT expr 
-
-	VAR	shift 20
-
-
-	.	error
-
-
-state 14:
-
-	app_term : app_term atom .  (reduce by rule 8)
+	prog : expr .  (reduce by rule 2)
 
 
 
-	.	reduce by rule 8
+	.	reduce by rule 2
 
 
-state 15:
+state 4:
 
-	expr : ISZERO expr .  (reduce by rule 5)
-
-
-
-	.	reduce by rule 5
-
-
-state 16:
-
-	expr : PRED expr .  (reduce by rule 4)
+	topdecl : decl .  (reduce by rule 4)
 
 
 
 	.	reduce by rule 4
 
 
-state 17:
+state 5:
 
-	expr : SUCC expr .  (reduce by rule 3)
+	topdecls : topdecl . SEMICOLON topdecls 
 
-
-
-	.	reduce by rule 3
-
-
-state 18:
-
-	expr : IF expr . THEN expr ELSE expr 
-
-	THEN	shift 21
+	SEMICOLON	shift 20
 
 
 	.	error
 
 
-state 19:
+state 6:
 
-	atom : LPAREN expr . RPAREN 
+	prog : topdecls . SEMICOLON expr 
 
-	RPAREN	shift 22
-
-
-	.	error
-
-
-state 20:
-
-	expr : LAM VAR . DOT expr 
-
-	DOT	shift 23
+	SEMICOLON	shift 21
 
 
 	.	error
 
 
-state 21:
+state 7:
 
-	expr : IF expr THEN . expr ELSE expr 
+	start : prog .  (reduce by rule 0)
 
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
+
+
+	.	reduce by rule 0
+
+
+state 8:
+
+	decl : VAL . VAR EQUALOP expr 
+
+	VAR	shift 22
+
+
+	.	error
+
+
+state 9:
+
+	expr : ISZERO . expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 23
+	app_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 10:
+
+	expr : PRED . expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
 
 	expr	goto 24
 	app_term	goto 2
@@ -300,29 +153,20 @@ state 21:
 	.	error
 
 
-state 22:
+state 11:
 
-	atom : LPAREN expr RPAREN .  (reduce by rule 10)
+	expr : SUCC . expr 
 
-
-
-	.	reduce by rule 10
-
-
-state 23:
-
-	expr : LAM VAR DOT . expr 
-
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
 
 	expr	goto 25
 	app_term	goto 2
@@ -331,39 +175,78 @@ state 23:
 	.	error
 
 
-state 24:
+state 12:
 
-	expr : IF expr THEN expr . ELSE expr 
+	atom : ZERO .  (reduce by rule 18)
 
-	ELSE	shift 26
 
+
+	.	reduce by rule 18
+
+
+state 13:
+
+	expr : IF . expr THEN expr ELSE expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 26
+	app_term	goto 2
+	atom	goto 1
 
 	.	error
 
 
-state 25:
+state 14:
 
-	expr : LAM VAR DOT expr .  (reduce by rule 1)
-
-
-
-	.	reduce by rule 1
+	atom : FALSE .  (reduce by rule 17)
 
 
-state 26:
 
-	expr : IF expr THEN expr ELSE . expr 
+	.	reduce by rule 17
 
-	LAM	shift 13
-	LPAREN	shift 12
-	VAR	shift 11
-	TRUE	shift 10
-	FALSE	shift 9
-	IF	shift 8
-	ZERO	shift 7
-	SUCC	shift 6
-	PRED	shift 5
-	ISZERO	shift 4
+
+state 15:
+
+	atom : TRUE .  (reduce by rule 16)
+
+
+
+	.	reduce by rule 16
+
+
+state 16:
+
+	atom : VAR .  (reduce by rule 14)
+
+
+
+	.	reduce by rule 14
+
+
+state 17:
+
+	atom : LPAREN . expr RPAREN 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
 
 	expr	goto 27
 	app_term	goto 2
@@ -372,16 +255,280 @@ state 26:
 	.	error
 
 
+state 18:
+
+	expr : LAM . VAR DOT expr 
+
+	VAR	shift 28
+
+
+	.	error
+
+
+state 19:
+
+	app_term : app_term atom .  (reduce by rule 13)
+
+
+
+	.	reduce by rule 13
+
+
+state 20:
+
+	topdecls : topdecl SEMICOLON . topdecls 
+
+	VAL	shift 8
+
+	topdecls	goto 29
+	topdecl	goto 5
+	decl	goto 4
+
+	.	error
+
+
+state 21:
+
+	prog : topdecls SEMICOLON . expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 30
+	app_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 22:
+
+	decl : VAL VAR . EQUALOP expr 
+
+	EQUALOP	shift 31
+
+
+	.	error
+
+
+state 23:
+
+	expr : ISZERO expr .  (reduce by rule 10)
+
+
+
+	.	reduce by rule 10
+
+
+state 24:
+
+	expr : PRED expr .  (reduce by rule 9)
+
+
+
+	.	reduce by rule 9
+
+
+state 25:
+
+	expr : SUCC expr .  (reduce by rule 8)
+
+
+
+	.	reduce by rule 8
+
+
+state 26:
+
+	expr : IF expr . THEN expr ELSE expr 
+
+	THEN	shift 32
+
+
+	.	error
+
+
 state 27:
 
-	expr : IF expr THEN expr ELSE expr .  (reduce by rule 2)
+	atom : LPAREN expr . RPAREN 
+
+	RPAREN	shift 33
 
 
-
-	.	reduce by rule 2
+	.	error
 
 
 state 28:
+
+	expr : LAM VAR . DOT expr 
+
+	DOT	shift 34
+
+
+	.	error
+
+
+state 29:
+
+	topdecls : topdecl SEMICOLON topdecls .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 30:
+
+	prog : topdecls SEMICOLON expr .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 31:
+
+	decl : VAL VAR EQUALOP . expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 35
+	app_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 32:
+
+	expr : IF expr THEN . expr ELSE expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 36
+	app_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 33:
+
+	atom : LPAREN expr RPAREN .  (reduce by rule 15)
+
+
+
+	.	reduce by rule 15
+
+
+state 34:
+
+	expr : LAM VAR DOT . expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 37
+	app_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 35:
+
+	decl : VAL VAR EQUALOP expr .  (reduce by rule 5)
+
+
+
+	.	reduce by rule 5
+
+
+state 36:
+
+	expr : IF expr THEN expr . ELSE expr 
+
+	ELSE	shift 38
+
+
+	.	error
+
+
+state 37:
+
+	expr : LAM VAR DOT expr .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 38:
+
+	expr : IF expr THEN expr ELSE . expr 
+
+	LAM	shift 18
+	LPAREN	shift 17
+	VAR	shift 16
+	TRUE	shift 15
+	FALSE	shift 14
+	IF	shift 13
+	ZERO	shift 12
+	SUCC	shift 11
+	PRED	shift 10
+	ISZERO	shift 9
+
+	expr	goto 39
+	app_term	goto 2
+	atom	goto 1
+
+	.	error
+
+
+state 39:
+
+	expr : IF expr THEN expr ELSE expr .  (reduce by rule 7)
+
+
+
+	.	reduce by rule 7
+
+
+state 40:
 
 
 	EOF	accept
@@ -389,5 +536,5 @@ state 28:
 
 	.	error
 
-21 of 130 action table entries left after compaction
-29 goto table entries
+37 of 168 action table entries left after compaction
+42 goto table entries

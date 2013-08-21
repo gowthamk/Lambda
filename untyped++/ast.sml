@@ -12,10 +12,31 @@ struct
                 | App of exp*exp
                 | Abs of id*exp
                 | Ite of exp*exp*exp
+                | Symbol of id
+                | Closure of id*exp*Env.t
 
-  type top_level = exp
+  datatype decl = Val of id*exp
 
-  fun layout ast = case ast of
+  (* can be enhanced later *)
+  type top_decl = decl
+
+  datatype prog = Prog of  top_decl list * exp
+
+  type top_level = prog
+
+  fun layoutProg (Prog(tds,exp)) = 
+    let val dstr = List.foldr (fn (td,acc) => 
+        (layoutTopDecl td)^";\n"^acc) (layoutExp exp) tds
+    in
+      dstr
+    end
+
+  fun layoutTopDecl td  = layoutDecl td
+
+  fun layoutDecl (Val(id,exp)) = 
+    "val "^id^" = "^(layoutExp exp)
+
+  fun layoutExp exp = case exp of
       True => "true"
     | False => "false"
     | Zero => "0"

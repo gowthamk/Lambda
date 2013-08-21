@@ -20,6 +20,9 @@ ws=[\ \t];
 %%
 <INITIAL>{eol} => (line := (!line)+1; lex());
 <INITIAL>{ws}+ => (debug "whitespace"; lex());
+<INITIAL>("val") => (debug "val"; Tokens.VAL(!line,yypos));
+<INITIAL>("=") => (debug "equals"; Tokens.EQUALOP(!line,yypos));
+<INITIAL>(";") => (debug "semi-colon"; Tokens.SEMICOLON(!line,yypos));
 <INITIAL>("true") => (debug "true"; Tokens.TRUE(!line,yypos));
 <INITIAL>("false") => (debug "false"; Tokens.FALSE(!line,yypos));
 <INITIAL>("if") => (debug "if"; Tokens.IF(!line,yypos));
