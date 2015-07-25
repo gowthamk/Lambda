@@ -40,7 +40,7 @@ struct
       if (Key.compare k key = 0) then v else
         (lookup key (if (Key.compare key k < 0) then t1 else t2))
 end
-module IntPairKey : ORDERED_KEY = struct
+module IntPairKey : ORDERED_KEY with type t = int*int = struct
   type t = int * int
   let compare (x1,y1) (x2,y2) =
     if x1 >= x2 then y1 - y2
@@ -54,4 +54,4 @@ module TM = TreeMap(IntPairKey)
  *        but an expression was expected of type
  *                 TM.key = TreeMap(IntPairKey).key
  *)
-let () = TM.add_entry (1,2) "hello" TM.empty_map;;
+let () = ignore @@ TM.add_entry (1,2) "hello" TM.empty_map;;
