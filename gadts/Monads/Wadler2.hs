@@ -47,6 +47,13 @@ module Wadler2 where
   tick :: Res ()
   tick = Res {runState = \initState -> ((), initState + 1)}
 
+  {- If you want to "get" the current state: -}
+  get :: Res Int
+  get = Res {runState = \initState -> (initState, initState)}
+  {- And, if you want to "put" a new state -}
+  put :: Int -> Res ()
+  put newState = Res {runState = \initState -> ((), newState)}
+
   {- Now, lets define the monadic evaluator -}
   evalM :: Term -> Res Int
   evalM (Con x) = return x
